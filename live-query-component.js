@@ -11,9 +11,12 @@ module.exports = function LQComponent(component) {
 	};
 
 	iterateLQs(function(key, LQ) {
+    LQ.exec();
 		component.state[key] = LQ.docs;
 		LQ.on('any', function() {
-			component.setState({key: LQ.docs});
+      var docsOnKeyProp = {};
+      docsOnKeyProp[key] = LQ.docs;
+			component.setState(docsOnKeyProp);
 		});
 	});
 
