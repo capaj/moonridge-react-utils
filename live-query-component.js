@@ -2,27 +2,26 @@ module.exports = function LQComponent(component) {
 	if (!component.state) {
 		component.state = {};
 	}
-	var iterateLQs = function(fn) {
-		var keys = Object.keys(component.LQs);
+	var iterateQueries = function(fn) {
+		var keys = Object.keys(component.queries);
 		var key;
 		while (key = keys.pop()) {
-			fn(key, component.LQs[key]);
+			fn(key, component.queries[key]);
 		}
 	};
 
-	iterateLQs(function(key, LQ) {
-    LQ.exec();
-		component.state[key] = LQ.docs;
-		LQ.on('any', function() {
+	iterateQueries(function(key, query) {
+    query.exec();
+		query.on('any', function() {
       var docsOnKeyProp = {};
-      docsOnKeyProp[key] = LQ.docs;
+      docsOnKeyProp[key] = query.result;
 			component.setState(docsOnKeyProp);
 		});
 	});
 
 	var originalUnmount = component.componentWillUnmount;
 	component.componentWillUnmount = function() {
-		iterateLQs(function(key, LQ) {
+		iterateQueries(function(key, LQ) {
 			LQ.stop();
 		});
 		originalUnmount.apply(component, arguments);

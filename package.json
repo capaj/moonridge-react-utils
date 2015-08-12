@@ -1,0 +1,27 @@
+{
+  "name": "moonridge-react-utils",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capaj/moonridge-react-utils.git"
+  },
+  "author": "capajj@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/capaj/moonridge-react-utils/issues"
+  },
+  "homepage": "https://github.com/capaj/moonridge-react-utils#readme",
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "mocha": "^2.2.5",
+    "sinon": "^1.15.4"
+  }
+}
