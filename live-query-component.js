@@ -16,6 +16,7 @@ module.exports = function LQComponent(component) {
   iterateQueries(function(key, query) {
 
     query = query.exec();
+    component.queries[key] = query;
     if (query.indexedByMethods.findOne) {
       component.state[key] = null;
     } else if (query.indexedByMethods.count) {
@@ -35,6 +36,8 @@ module.exports = function LQComponent(component) {
     iterateQueries(function(key, LQ) {
       LQ.stop();
     });
-    originalUnmount.apply(component, arguments);
+    if (originalUnmount) {
+      originalUnmount.apply(component, arguments);
+    }
   }
 };
